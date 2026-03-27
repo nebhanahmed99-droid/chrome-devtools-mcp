@@ -8,6 +8,8 @@ import '../polyfill.js';
 
 import process from 'node:process';
 
+import updateNotifier from 'update-notifier';
+
 import {createMcpServer, logDisclaimers} from '../index.js';
 import {logger, saveLogsToFile} from '../logger.js';
 import {computeFlagUsage} from '../telemetry/flagUtils.js';
@@ -15,6 +17,13 @@ import {StdioServerTransport} from '../third_party/index.js';
 import {VERSION} from '../version.js';
 
 import {cliOptions, parseArguments} from './chrome-devtools-mcp-cli-options.js';
+
+updateNotifier({
+  pkg: {
+    name: 'chrome-devtools-mcp',
+    version: VERSION,
+  },
+}).notify();
 
 export const args = parseArguments(VERSION);
 

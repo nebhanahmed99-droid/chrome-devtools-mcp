@@ -8,6 +8,7 @@
 
 import process from 'node:process';
 
+import updateNotifier from 'update-notifier';
 import type {Options, PositionalOptions} from 'yargs';
 
 import {
@@ -23,6 +24,13 @@ import {VERSION} from '../version.js';
 
 import {commands} from './chrome-devtools-cli-options.js';
 import {cliOptions, parseArguments} from './chrome-devtools-mcp-cli-options.js';
+
+updateNotifier({
+  pkg: {
+    name: 'chrome-devtools-mcp',
+    version: VERSION,
+  },
+}).notify();
 
 async function start(args: string[]) {
   const combinedArgs = [...args, ...defaultArgs];
